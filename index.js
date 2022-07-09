@@ -18,6 +18,13 @@ app.use(express.static('static'));
 app.use(fileUpload({}));
 app.use('/api', postRouter);
 app.use('/api', chartRouter);
+app.use(function (req, res, next) {
+   res.setHeader('Access-Control-Allow-Origin', '*');
+   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+   res.setHeader('Access-Control-Allow-Credentials', true);
+   next();
+});
 
 async function startApp() {
    try {
